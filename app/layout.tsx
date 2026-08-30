@@ -2,6 +2,9 @@ import type { Metadata } from 'next';
 import './globals.css';
 
 export const metadata: Metadata = {
+  metadataBase: new URL(
+    'https://adao-zhou-product-portfolio.wangguangyi1007.chatgpt.site',
+  ),
   title: 'Adao Zhou — AI Product Builder',
   description:
     'Independent AI product builder shaping useful products, systems and digital experiences.',
