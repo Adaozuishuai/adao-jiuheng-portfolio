@@ -1,16 +1,8 @@
 'use client';
 
 import { useState } from 'react';
-import { ArrowDown, ArrowUpRight, Minus, Plus } from 'lucide-react';
+import { ArrowDown, ArrowUpRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import {
-  Sheet,
-  SheetClose,
-  SheetContent,
-  SheetDescription,
-  SheetTitle,
-  SheetTrigger,
-} from '@/components/ui/sheet';
 
 const projects = [
   {
@@ -53,13 +45,6 @@ const projects = [
 
 const playground = ['产品逆向拆解', '界面系统设计', '智能体记忆机制', '市场竞争地图'];
 
-const navItems = [
-  { href: 'work', label: '作品' },
-  { href: 'about', label: '关于' },
-  { href: 'playground', label: '实验场' },
-  { href: 'contact', label: '联系' },
-];
-
 export default function Home() {
   const [motion, setMotion] = useState(true);
 
@@ -69,52 +54,9 @@ export default function Home() {
         <a className="wordmark" href="#top" aria-label="Adao Jiuheng，返回首页">
           A/J<sup>®</sup>
         </a>
-        <div className="header-status" aria-label="当前状态">
-          <span className="status-dot" />
-          独立 AI 产品构建者
-        </div>
-        <Sheet>
-          <SheetTrigger
-            render={
-              <Button variant="ghost" className="menu-button" aria-label="打开菜单" />
-            }
-          >
-            菜单 <Plus aria-hidden="true" />
-          </SheetTrigger>
-          <SheetContent side="top" showCloseButton={false} className="menu-sheet">
-            <SheetTitle className="sr-only">网站导航</SheetTitle>
-            <SheetDescription className="sr-only">
-              浏览作品、关于、实验场与联系信息。
-            </SheetDescription>
-            <div className="menu-topline">
-              <span>Adao Jiuheng</span>
-              <SheetClose
-                render={
-                  <Button variant="ghost" className="menu-button menu-close" aria-label="关闭菜单" />
-                }
-              >
-                关闭 <Minus aria-hidden="true" />
-              </SheetClose>
-            </div>
-            <nav className="menu-nav" aria-label="主导航">
-              {navItems.map((item, index) => (
-                <SheetClose key={item.href} render={<a href={`#${item.href}`} className="menu-item" />}>
-                  <span>0{index + 1}</span>
-                  {item.label}
-                  <ArrowUpRight aria-hidden="true" />
-                </SheetClose>
-              ))}
-            </nav>
-            <div className="menu-footer">
-              <span>上海 · 面向全球协作</span>
-              <a href="mailto:hello@example.com">发送邮件</a>
-            </div>
-          </SheetContent>
-        </Sheet>
       </header>
 
       <section className="hero" id="top" aria-labelledby="hero-title">
-        <p className="hero-role hero-role-left">AI 产品</p>
         <h1 id="hero-title" className="hero-title" aria-label="Adao Jiuheng">
           <span>ADAO</span>
           <span>JIUHENG</span>
@@ -125,22 +67,7 @@ export default function Home() {
           <span className="orbit orbit-two" />
           <span className="orbit orbit-three" />
           <span className="emblem-core">A</span>
-          <span className="emblem-chip chip-one">01</span>
-          <span className="emblem-chip chip-two">AI</span>
           <span className="emblem-chip chip-three">↗</span>
-        </div>
-
-        <p className="hero-role hero-role-right">技术战略</p>
-
-        <div className="hero-meta">
-          <div>
-            <span className="meta-label">上线时间</span>
-            <strong>2026</strong>
-          </div>
-          <div>
-            <span className="meta-label">关注领域</span>
-            <strong>产品 · AI · 系统</strong>
-          </div>
         </div>
 
         <a className="scroll-cue" href="#work">
