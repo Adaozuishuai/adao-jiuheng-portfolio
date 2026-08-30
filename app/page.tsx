@@ -15,43 +15,50 @@ import {
 const projects = [
   {
     id: '01',
-    type: 'Desktop · AI learning',
-    title: 'Simple Physics',
-    description: 'A mechanics learning workspace that checks formulas, units and reasoning — not just final answers.',
+    type: '桌面端 · AI 学习产品',
+    title: '简单物理',
+    description: '面向力学学习的专业工作台，同时检查公式、单位与推理过程，而不只给出最终答案。',
     accent: 'coral',
     mark: 'F=ma',
     image: '/og.png',
   },
   {
     id: '02',
-    type: 'Desktop · Agent platform',
-    title: 'DeepDesk',
-    description: 'A local-first agent desktop where tools, model runs and human decisions stay in one visible flow.',
+    type: '桌面端 · 智能体平台',
+    title: '深度桌面',
+    description: '本地优先的智能体桌面，让工具调用、模型执行与人工决策始终处于可见、可控的工作流中。',
     accent: 'acid',
     mark: '↳AI',
     image: null,
   },
   {
     id: '03',
-    type: 'Research · Product strategy',
-    title: 'Agent Evaluation',
-    description: 'A practical framework linking benchmark results to business completion, compliance, latency and cost.',
+    type: '研究 · 产品战略',
+    title: '智能体评测体系',
+    description: '把基准测试与真实业务完成率、合规性、延迟和成本连接起来的实用评测框架。',
     accent: 'ink',
     mark: '94%',
     image: null,
   },
   {
     id: '04',
-    type: 'Data · Executive dashboard',
-    title: 'WorkBuddy Signals',
-    description: 'An evidence-backed dashboard turning product adoption, market signals and company filings into decisions.',
+    type: '数据 · 管理决策看板',
+    title: '企业智能体信号台',
+    description: '将产品采用率、市场信号和公司披露转化为可追溯决策依据的管理看板。',
     accent: 'blue',
     mark: '16.3',
     image: null,
   },
 ];
 
-const playground = ['Product teardown', 'Interface systems', 'Agent memory', 'Market maps'];
+const playground = ['产品逆向拆解', '界面系统设计', '智能体记忆机制', '市场竞争地图'];
+
+const navItems = [
+  { href: 'work', label: '作品' },
+  { href: 'about', label: '关于' },
+  { href: 'playground', label: '实验场' },
+  { href: 'contact', label: '联系' },
+];
 
 export default function Home() {
   const [motion, setMotion] = useState(true);
@@ -59,58 +66,58 @@ export default function Home() {
   return (
     <main className="portfolio-shell" data-motion={motion ? 'on' : 'off'}>
       <header className="site-header">
-        <a className="wordmark" href="#top" aria-label="Adao Zhou, home">
-          A/Z<sup>®</sup>
+        <a className="wordmark" href="#top" aria-label="Adao Jiuheng，返回首页">
+          A/J<sup>®</sup>
         </a>
-        <div className="header-status" aria-label="Availability">
+        <div className="header-status" aria-label="当前状态">
           <span className="status-dot" />
-          Independent product builder
+          独立 AI 产品构建者
         </div>
         <Sheet>
           <SheetTrigger
             render={
-              <Button variant="ghost" className="menu-button" aria-label="Open menu" />
+              <Button variant="ghost" className="menu-button" aria-label="打开菜单" />
             }
           >
-            Menu <Plus aria-hidden="true" />
+            菜单 <Plus aria-hidden="true" />
           </SheetTrigger>
           <SheetContent side="top" showCloseButton={false} className="menu-sheet">
-            <SheetTitle className="sr-only">Navigation</SheetTitle>
+            <SheetTitle className="sr-only">网站导航</SheetTitle>
             <SheetDescription className="sr-only">
-              Navigate through the portfolio.
+              浏览作品、关于、实验场与联系信息。
             </SheetDescription>
             <div className="menu-topline">
-              <span>Adao Zhou</span>
+              <span>Adao Jiuheng</span>
               <SheetClose
                 render={
-                  <Button variant="ghost" className="menu-button menu-close" aria-label="Close menu" />
+                  <Button variant="ghost" className="menu-button menu-close" aria-label="关闭菜单" />
                 }
               >
-                Close <Minus aria-hidden="true" />
+                关闭 <Minus aria-hidden="true" />
               </SheetClose>
             </div>
-            <nav className="menu-nav" aria-label="Main navigation">
-              {['work', 'about', 'playground', 'contact'].map((item, index) => (
-                <SheetClose key={item} render={<a href={`#${item}`} className="menu-item" />}>
+            <nav className="menu-nav" aria-label="主导航">
+              {navItems.map((item, index) => (
+                <SheetClose key={item.href} render={<a href={`#${item.href}`} className="menu-item" />}>
                   <span>0{index + 1}</span>
-                  {item}
+                  {item.label}
                   <ArrowUpRight aria-hidden="true" />
                 </SheetClose>
               ))}
             </nav>
             <div className="menu-footer">
-              <span>Shanghai · Working globally</span>
-              <a href="mailto:hello@example.com">hello@example.com</a>
+              <span>上海 · 面向全球协作</span>
+              <a href="mailto:hello@example.com">发送邮件</a>
             </div>
           </SheetContent>
         </Sheet>
       </header>
 
       <section className="hero" id="top" aria-labelledby="hero-title">
-        <p className="hero-role hero-role-left">AI PRODUCT</p>
-        <h1 id="hero-title" className="hero-title" aria-label="Adao Zhou">
+        <p className="hero-role hero-role-left">AI 产品</p>
+        <h1 id="hero-title" className="hero-title" aria-label="Adao Jiuheng">
           <span>ADAO</span>
-          <span>ZHOU</span>
+          <span>JIUHENG</span>
         </h1>
 
         <div className="hero-emblem" aria-hidden="true">
@@ -123,32 +130,32 @@ export default function Home() {
           <span className="emblem-chip chip-three">↗</span>
         </div>
 
-        <p className="hero-role hero-role-right">TECH STRATEGY</p>
+        <p className="hero-role hero-role-right">技术战略</p>
 
         <div className="hero-meta">
           <div>
-            <span className="meta-label">Launch</span>
+            <span className="meta-label">上线时间</span>
             <strong>2026</strong>
           </div>
           <div>
-            <span className="meta-label">Focus</span>
-            <strong>Product · AI · Systems</strong>
+            <span className="meta-label">关注领域</span>
+            <strong>产品 · AI · 系统</strong>
           </div>
         </div>
 
         <a className="scroll-cue" href="#work">
-          <span>Scroll to explore</span>
+          <span>向下探索</span>
           <ArrowDown size={16} strokeWidth={1.5} />
         </a>
       </section>
 
       <section className="work-section" id="work" aria-labelledby="work-heading">
         <div className="section-heading">
-          <p className="eyebrow">Selected work · 2024—26</p>
-          <h2 id="work-heading">Useful systems,<br />made memorable.</h2>
-          <p className="section-note">Drag or scroll the track</p>
+          <p className="eyebrow">代表作品 · 2024—26</p>
+          <h2 id="work-heading">让有用的系统，<br />也令人难忘。</h2>
+          <p className="section-note">拖动或滚动浏览</p>
         </div>
-        <div className="project-track" aria-label="Selected projects">
+        <div className="project-track" aria-label="代表项目">
           {projects.map((project) => (
             <article className="project-card" key={project.id}>
               <div className={`project-visual visual-${project.accent}`}>
@@ -156,7 +163,7 @@ export default function Home() {
                   <img
                     className="project-image"
                     src={project.image}
-                    alt="Adao Zhou AI Product Builder editorial identity"
+                    alt="Adao Jiuheng AI 产品构建者视觉形象"
                   />
                 ) : (
                   <>
@@ -177,20 +184,20 @@ export default function Home() {
       </section>
 
       <section className="about-section" id="about" aria-labelledby="about-heading">
-        <p className="eyebrow">About · Product × Technology</p>
+        <p className="eyebrow">关于我 · 产品 × 技术</p>
         <div className="about-grid">
           <h2 id="about-heading">
-            I turn ambiguous AI ideas into products that people can understand, trust and use.
+            我把模糊的 AI 想法，变成用户能理解、信任并真正使用的产品。
           </h2>
           <div className="about-copy">
             <p>
-              My work sits between product strategy, interaction design and engineering. I care about the whole path: the business question, the system boundary, the interface and the evidence that it works.
+              我的工作横跨产品战略、交互设计与工程实现。我关注完整链路：商业问题是否成立、系统边界是否清晰、界面是否好用，以及结果是否有证据支撑。
             </p>
             <dl>
-              <div><dt>01</dt><dd>Product direction</dd></div>
-              <div><dt>02</dt><dd>Agent architecture</dd></div>
-              <div><dt>03</dt><dd>Prototyping & delivery</dd></div>
-              <div><dt>04</dt><dd>Evaluation systems</dd></div>
+              <div><dt>01</dt><dd>产品方向与战略</dd></div>
+              <div><dt>02</dt><dd>智能体架构设计</dd></div>
+              <div><dt>03</dt><dd>原型开发与交付</dd></div>
+              <div><dt>04</dt><dd>评测与验证体系</dd></div>
             </dl>
           </div>
         </div>
@@ -198,8 +205,8 @@ export default function Home() {
 
       <section className="playground-section" id="playground" aria-labelledby="playground-heading">
         <div className="section-heading compact-heading">
-          <p className="eyebrow">Playground · Ongoing</p>
-          <h2 id="playground-heading">Things I keep pulling apart.</h2>
+          <p className="eyebrow">实验场 · 持续更新</p>
+          <h2 id="playground-heading">那些我反复拆解的问题。</h2>
         </div>
         <div className="play-list">
           {playground.map((item, index) => (
@@ -214,14 +221,14 @@ export default function Home() {
 
       <footer className="contact-section" id="contact">
         <div className="contact-kicker">
-          <span className="status-dot" /> Available for thoughtful work
+          <span className="status-dot" /> 接受有价值的合作
         </div>
-        <p>Have a hard product problem?</p>
+        <p>有一个难解的产品问题？</p>
         <a className="contact-link" href="mailto:hello@example.com">
-          LET’S TALK<span>↗</span>
+          来聊聊<span>↗</span>
         </a>
         <div className="contact-meta">
-          <span>© 2026 Adao Zhou</span>
+          <span>© 2026 Adao Jiuheng</span>
           <Button
             type="button"
             variant="ghost"
@@ -229,9 +236,9 @@ export default function Home() {
             onClick={() => setMotion((value) => !value)}
             aria-pressed={!motion}
           >
-            Motion {motion ? 'on' : 'off'}
+            动效{motion ? '开启' : '关闭'}
           </Button>
-          <a href="#top">Back to top ↑</a>
+          <a href="#top">返回顶部 ↑</a>
         </div>
       </footer>
     </main>

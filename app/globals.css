@@ -123,6 +123,12 @@ button, a { -webkit-tap-highlight-color: transparent; }
 
 .hero-title span { display: block; }
 
+.hero-title span:last-child {
+  font-size: 0.68em;
+  line-height: 0.9;
+  letter-spacing: -0.065em;
+}
+
 .hero-role {
   position: absolute;
   top: 49%;

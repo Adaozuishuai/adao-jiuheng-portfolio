@@ -5,21 +5,21 @@ export const metadata: Metadata = {
   metadataBase: new URL(
     'https://adao-zhou-product-portfolio.wangguangyi1007.chatgpt.site',
   ),
-  title: 'Adao Zhou — AI Product Builder',
+  title: 'Adao Jiuheng — AI 产品构建者',
   description:
-    'Independent AI product builder shaping useful products, systems and digital experiences.',
+    '独立 AI 产品构建者，专注于产品战略、智能体系统与可落地的数字体验。',
   openGraph: {
     type: 'website',
-    title: 'Adao Zhou — AI Product Builder',
+    title: 'Adao Jiuheng — AI 产品构建者',
     description:
-      'Independent AI product builder shaping useful products, systems and digital experiences.',
-    images: [{ url: '/og.png', width: 1600, height: 900, alt: 'Adao Zhou — AI Product Builder' }],
+      '独立 AI 产品构建者，专注于产品战略、智能体系统与可落地的数字体验。',
+    images: [{ url: '/og.png', width: 1600, height: 900, alt: 'Adao Jiuheng — AI 产品构建者' }],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Adao Zhou — AI Product Builder',
+    title: 'Adao Jiuheng — AI 产品构建者',
     description:
-      'Independent AI product builder shaping useful products, systems and digital experiences.',
+      '独立 AI 产品构建者，专注于产品战略、智能体系统与可落地的数字体验。',
     images: ['/og.png'],
   },
 };
@@ -30,7 +30,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="zh-CN">
       <body>{children}</body>
     </html>
   );
