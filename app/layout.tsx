@@ -8,6 +8,15 @@ export const metadata: Metadata = {
   title: 'Adao Jiuheng — AI 产品构建者',
   description:
     '独立 AI 产品构建者，专注于产品战略、智能体系统与可落地的数字体验。',
+  icons: {
+    icon: [
+      { url: '/favicon-dao-connected.png?v=6', type: 'image/png', sizes: '1024x1024' },
+    ],
+    shortcut: ['/favicon-dao-connected.png?v=6'],
+    apple: [
+      { url: '/favicon-dao-connected.png?v=6', type: 'image/png', sizes: '1024x1024' },
+    ],
+  },
   openGraph: {
     type: 'website',
     title: 'Adao Jiuheng — AI 产品构建者',
