@@ -5,9 +5,8 @@ export const metadata: Metadata = {
   metadataBase: new URL(
     'https://adao-zhou-product-portfolio.wangguangyi1007.chatgpt.site',
   ),
-  title: 'Adao Jiuheng — AI 产品构建者',
-  description:
-    '独立 AI 产品构建者，专注于产品战略、智能体系统与可落地的数字体验。',
+  title: 'Jiuheng — 作品与文字',
+  description: '九恒的个人作品集与博客。',
   icons: {
     icon: [
       { url: '/favicon-dao-connected.png?v=6', type: 'image/png', sizes: '1024x1024' },
@@ -19,16 +18,14 @@ export const metadata: Metadata = {
   },
   openGraph: {
     type: 'website',
-    title: 'Adao Jiuheng — AI 产品构建者',
-    description:
-      '独立 AI 产品构建者，专注于产品战略、智能体系统与可落地的数字体验。',
-    images: [{ url: '/og.png', width: 1600, height: 900, alt: 'Adao Jiuheng — AI 产品构建者' }],
+    title: 'Jiuheng — 作品与文字',
+    description: '九恒的个人作品集与博客。',
+    images: [{ url: '/og.png', width: 1600, height: 900, alt: 'Jiuheng — 作品与文字' }],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Adao Jiuheng — AI 产品构建者',
-    description:
-      '独立 AI 产品构建者，专注于产品战略、智能体系统与可落地的数字体验。',
+    title: 'Jiuheng — 作品与文字',
+    description: '九恒的个人作品集与博客。',
     images: ['/og.png'],
   },
 };
