@@ -1,0 +1,52 @@
+{
+  "status": "passed",
+  "method": "Real Chrome tab switch via raw CDP, without focus emulation",
+  "initial": {
+    "visibility": "visible",
+    "state": "playing",
+    "time": 1165.998,
+    "animations": [
+      "running",
+      "running",
+      "running",
+      "running",
+      "running"
+    ]
+  },
+  "hidden": {
+    "visibility": "hidden",
+    "state": "paused",
+    "time": 1165.998,
+    "animations": [
+      "paused",
+      "paused",
+      "paused",
+      "paused",
+      "paused"
+    ]
+  },
+  "stillHidden": {
+    "visibility": "hidden",
+    "state": "paused",
+    "time": 1165.998,
+    "animations": [
+      "paused",
+      "paused",
+      "paused",
+      "paused",
+      "paused"
+    ]
+  },
+  "resumed": {
+    "visibility": "visible",
+    "state": "playing",
+    "time": 1416.726,
+    "animations": [
+      "running",
+      "running",
+      "running",
+      "running",
+      "running"
+    ]
+  }
+}

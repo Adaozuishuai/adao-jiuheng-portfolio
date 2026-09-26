@@ -1,0 +1,1216 @@
+{
+  "base": "http://127.0.0.1:3000",
+  "results": [
+    {
+      "name": "only starts at 30 percent visibility after decoding",
+      "status": "passed",
+      "evidence": {
+        "state": "playing",
+        "time": 16.69999999999994,
+        "animations": [
+          {
+            "time": 16.69999999999994,
+            "state": "running"
+          },
+          {
+            "time": 16.69999999999994,
+            "state": "running"
+          },
+          {
+            "time": 16.69999999999994,
+            "state": "running"
+          },
+          {
+            "time": 16.69999999999994,
+            "state": "running"
+          },
+          {
+            "time": 16.69999999999994,
+            "state": "running"
+          }
+        ],
+        "original": "0",
+        "layersVisible": "visible",
+        "width": 1328,
+        "height": 443,
+        "overflow": false,
+        "layers": [
+          {
+            "id": "child-still",
+            "opacity": 0.0278333,
+            "x": 369.296,
+            "y": 347.277
+          },
+          {
+            "id": "child-travel",
+            "opacity": 0,
+            "x": 369.296,
+            "y": 347.277
+          },
+          {
+            "id": "teen-still",
+            "opacity": 0,
+            "x": 369.296,
+            "y": 347.2769
+          },
+          {
+            "id": "teen-travel",
+            "opacity": 0,
+            "x": 494.637,
+            "y": 327.712
+          },
+          {
+            "id": "adult-still",
+            "opacity": 0,
+            "x": 494.63700000000006,
+            "y": 327.7125
+          }
+        ]
+      }
+    },
+    {
+      "name": "key stage start",
+      "status": "passed",
+      "evidence": {
+        "state": "playing",
+        "time": 600,
+        "animations": [
+          {
+            "time": 600,
+            "state": "paused"
+          },
+          {
+            "time": 600,
+            "state": "paused"
+          },
+          {
+            "time": 600,
+            "state": "paused"
+          },
+          {
+            "time": 600,
+            "state": "paused"
+          },
+          {
+            "time": 600,
+            "state": "paused"
+          }
+        ],
+        "original": "0",
+        "layersVisible": "visible",
+        "width": 1328,
+        "height": 443,
+        "overflow": false,
+        "layers": [
+          {
+            "id": "child-still",
+            "opacity": 1,
+            "x": 369.296,
+            "y": 347.277
+          },
+          {
+            "id": "child-travel",
+            "opacity": 0,
+            "x": 369.296,
+            "y": 347.277
+          },
+          {
+            "id": "teen-still",
+            "opacity": 0,
+            "x": 369.296,
+            "y": 347.2769
+          },
+          {
+            "id": "teen-travel",
+            "opacity": 0,
+            "x": 494.637,
+            "y": 327.712
+          },
+          {
+            "id": "adult-still",
+            "opacity": 0,
+            "x": 494.63700000000006,
+            "y": 327.7125
+          }
+        ]
+      }
+    },
+    {
+      "name": "key stage teen",
+      "status": "passed",
+      "evidence": {
+        "state": "playing",
+        "time": 3000,
+        "animations": [
+          {
+            "time": 3000,
+            "state": "paused"
+          },
+          {
+            "time": 3000,
+            "state": "paused"
+          },
+          {
+            "time": 3000,
+            "state": "paused"
+          },
+          {
+            "time": 3000,
+            "state": "paused"
+          },
+          {
+            "time": 3000,
+            "state": "paused"
+          }
+        ],
+        "original": "0",
+        "layersVisible": "visible",
+        "width": 1328,
+        "height": 443,
+        "overflow": false,
+        "layers": [
+          {
+            "id": "child-still",
+            "opacity": 1,
+            "x": 369.296,
+            "y": 347.277
+          },
+          {
+            "id": "child-travel",
+            "opacity": 0,
+            "x": 494.637,
+            "y": 327.71209999999996
+          },
+          {
+            "id": "teen-still",
+            "opacity": 1,
+            "x": 494.637,
+            "y": 327.712
+          },
+          {
+            "id": "teen-travel",
+            "opacity": 0,
+            "x": 494.637,
+            "y": 327.712
+          },
+          {
+            "id": "adult-still",
+            "opacity": 0,
+            "x": 494.63700000000006,
+            "y": 327.7125
+          }
+        ]
+      }
+    },
+    {
+      "name": "key stage final",
+      "status": "passed",
+      "evidence": {
+        "state": "playing",
+        "time": 5800,
+        "animations": [
+          {
+            "time": 5800,
+            "state": "paused"
+          },
+          {
+            "time": 5800,
+            "state": "paused"
+          },
+          {
+            "time": 5800,
+            "state": "paused"
+          },
+          {
+            "time": 5800,
+            "state": "paused"
+          },
+          {
+            "time": 5800,
+            "state": "paused"
+          }
+        ],
+        "original": "0",
+        "layersVisible": "visible",
+        "width": 1328,
+        "height": 443,
+        "overflow": false,
+        "layers": [
+          {
+            "id": "child-still",
+            "opacity": 1,
+            "x": 369.296,
+            "y": 347.277
+          },
+          {
+            "id": "child-travel",
+            "opacity": 0,
+            "x": 494.637,
+            "y": 327.71209999999996
+          },
+          {
+            "id": "teen-still",
+            "opacity": 1,
+            "x": 494.637,
+            "y": 327.712
+          },
+          {
+            "id": "teen-travel",
+            "opacity": 0,
+            "x": 627.315,
+            "y": 311.8155
+          },
+          {
+            "id": "adult-still",
+            "opacity": 1,
+            "x": 627.315,
+            "y": 311.816
+          }
+        ]
+      }
+    },
+    {
+      "name": "transition foot and opacity alignment at 1700ms",
+      "status": "passed",
+      "evidence": {
+        "state": "playing",
+        "time": 1700,
+        "animations": [
+          {
+            "time": 1700,
+            "state": "paused"
+          },
+          {
+            "time": 1700,
+            "state": "paused"
+          },
+          {
+            "time": 1700,
+            "state": "paused"
+          },
+          {
+            "time": 1700,
+            "state": "paused"
+          },
+          {
+            "time": 1700,
+            "state": "paused"
+          }
+        ],
+        "original": "0",
+        "layersVisible": "visible",
+        "width": 1328,
+        "height": 443,
+        "overflow": false,
+        "layers": [
+          {
+            "id": "child-still",
+            "opacity": 1,
+            "x": 369.296,
+            "y": 347.277
+          },
+          {
+            "id": "child-travel",
+            "opacity": 0.5,
+            "x": 431.9664,
+            "y": 337.49454
+          },
+          {
+            "id": "teen-still",
+            "opacity": 0.5,
+            "x": 431.96659999999997,
+            "y": 337.49446
+          },
+          {
+            "id": "teen-travel",
+            "opacity": 0,
+            "x": 494.637,
+            "y": 327.712
+          },
+          {
+            "id": "adult-still",
+            "opacity": 0,
+            "x": 494.63700000000006,
+            "y": 327.7125
+          }
+        ]
+      }
+    },
+    {
+      "name": "transition foot and opacity alignment at 4400ms",
+      "status": "passed",
+      "evidence": {
+        "state": "playing",
+        "time": 4400,
+        "animations": [
+          {
+            "time": 4400,
+            "state": "paused"
+          },
+          {
+            "time": 4400,
+            "state": "paused"
+          },
+          {
+            "time": 4400,
+            "state": "paused"
+          },
+          {
+            "time": 4400,
+            "state": "paused"
+          },
+          {
+            "time": 4400,
+            "state": "paused"
+          }
+        ],
+        "original": "0",
+        "layersVisible": "visible",
+        "width": 1328,
+        "height": 443,
+        "overflow": false,
+        "layers": [
+          {
+            "id": "child-still",
+            "opacity": 1,
+            "x": 369.296,
+            "y": 347.277
+          },
+          {
+            "id": "child-travel",
+            "opacity": 0,
+            "x": 494.637,
+            "y": 327.71209999999996
+          },
+          {
+            "id": "teen-still",
+            "opacity": 1,
+            "x": 494.637,
+            "y": 327.712
+          },
+          {
+            "id": "teen-travel",
+            "opacity": 0.5,
+            "x": 560.9759,
+            "y": 319.76375
+          },
+          {
+            "id": "adult-still",
+            "opacity": 0.5,
+            "x": 560.9761000000001,
+            "y": 319.76424999999995
+          }
+        ]
+      }
+    },
+    {
+      "name": "leave viewport pauses and reentry resumes",
+      "status": "passed",
+      "evidence": {
+        "state": "paused",
+        "time": 1016.6379999999999,
+        "animations": [
+          {
+            "time": 1016.6379999999999,
+            "state": "paused"
+          },
+          {
+            "time": 1016.6379999999999,
+            "state": "paused"
+          },
+          {
+            "time": 1016.6379999999999,
+            "state": "paused"
+          },
+          {
+            "time": 1016.6379999999999,
+            "state": "paused"
+          },
+          {
+            "time": 1016.6379999999999,
+            "state": "paused"
+          }
+        ],
+        "original": "0",
+        "layersVisible": "visible",
+        "width": 1328,
+        "height": 443,
+        "overflow": false,
+        "layers": [
+          {
+            "id": "child-still",
+            "opacity": 1,
+            "x": 369.296,
+            "y": 347.277
+          },
+          {
+            "id": "child-travel",
+            "opacity": 0.927008,
+            "x": 378.44487,
+            "y": 345.84891999999996
+          },
+          {
+            "id": "teen-still",
+            "opacity": 0.072992,
+            "x": 378.445,
+            "y": 345.8488
+          },
+          {
+            "id": "teen-travel",
+            "opacity": 0,
+            "x": 494.637,
+            "y": 327.712
+          },
+          {
+            "id": "adult-still",
+            "opacity": 0,
+            "x": 494.63700000000006,
+            "y": 327.7125
+          }
+        ]
+      }
+    },
+    {
+      "name": "completion freezes three figures and releases animations",
+      "status": "passed",
+      "evidence": {
+        "state": "complete",
+        "animations": [],
+        "original": "0",
+        "layersVisible": "visible",
+        "width": 1328,
+        "height": 443,
+        "overflow": false,
+        "layers": [
+          {
+            "id": "child-still",
+            "opacity": 1,
+            "x": 369.296,
+            "y": 347.277
+          },
+          {
+            "id": "child-travel",
+            "opacity": 0,
+            "x": 369.296,
+            "y": 347.277
+          },
+          {
+            "id": "teen-still",
+            "opacity": 1,
+            "x": 494.637,
+            "y": 327.712
+          },
+          {
+            "id": "teen-travel",
+            "opacity": 0,
+            "x": 494.637,
+            "y": 327.712
+          },
+          {
+            "id": "adult-still",
+            "opacity": 1,
+            "x": 627.315,
+            "y": 311.816
+          }
+        ]
+      }
+    },
+    {
+      "name": "one accessible image description with hidden animation layers",
+      "status": "passed",
+      "evidence": {
+        "imageDescriptions": 1
+      }
+    },
+    {
+      "name": "native detail return preserves completion",
+      "status": "passed",
+      "evidence": {
+        "state": "complete",
+        "animations": [],
+        "original": "0",
+        "layersVisible": "visible",
+        "width": 1328,
+        "height": 443,
+        "overflow": false,
+        "layers": [
+          {
+            "id": "child-still",
+            "opacity": 1,
+            "x": 369.296,
+            "y": 347.277
+          },
+          {
+            "id": "child-travel",
+            "opacity": 0,
+            "x": 369.296,
+            "y": 347.277
+          },
+          {
+            "id": "teen-still",
+            "opacity": 1,
+            "x": 494.637,
+            "y": 327.712
+          },
+          {
+            "id": "teen-travel",
+            "opacity": 0,
+            "x": 494.637,
+            "y": 327.712
+          },
+          {
+            "id": "adult-still",
+            "opacity": 1,
+            "x": 627.315,
+            "y": 311.816
+          }
+        ]
+      }
+    },
+    {
+      "name": "home reload permits a new presentation",
+      "status": "passed",
+      "evidence": {
+        "state": "playing",
+        "time": 16.699999999999992,
+        "animations": [
+          {
+            "time": 16.699999999999992,
+            "state": "running"
+          },
+          {
+            "time": 16.699999999999992,
+            "state": "running"
+          },
+          {
+            "time": 16.699999999999992,
+            "state": "running"
+          },
+          {
+            "time": 16.699999999999992,
+            "state": "running"
+          },
+          {
+            "time": 16.699999999999992,
+            "state": "running"
+          }
+        ],
+        "original": "0",
+        "layersVisible": "visible",
+        "width": 1328,
+        "height": 443,
+        "overflow": false,
+        "layers": [
+          {
+            "id": "child-still",
+            "opacity": 0.0278333,
+            "x": 369.296,
+            "y": 347.277
+          },
+          {
+            "id": "child-travel",
+            "opacity": 0,
+            "x": 369.296,
+            "y": 347.277
+          },
+          {
+            "id": "teen-still",
+            "opacity": 0,
+            "x": 369.296,
+            "y": 347.2769
+          },
+          {
+            "id": "teen-travel",
+            "opacity": 0,
+            "x": 494.637,
+            "y": 327.712
+          },
+          {
+            "id": "adult-still",
+            "opacity": 0,
+            "x": 494.63700000000006,
+            "y": 327.7125
+          }
+        ]
+      }
+    },
+    {
+      "name": "runtime reduced motion immediately restores original",
+      "status": "passed",
+      "evidence": {
+        "state": "fallback",
+        "animations": [],
+        "original": "1",
+        "layersVisible": "hidden",
+        "width": 1328,
+        "height": 443,
+        "overflow": false,
+        "layers": [
+          {
+            "id": "child-still",
+            "opacity": 0,
+            "x": 369.296,
+            "y": 347.277
+          },
+          {
+            "id": "child-travel",
+            "opacity": 0,
+            "x": 369.296,
+            "y": 347.277
+          },
+          {
+            "id": "teen-still",
+            "opacity": 0,
+            "x": 494.637,
+            "y": 327.712
+          },
+          {
+            "id": "teen-travel",
+            "opacity": 0,
+            "x": 494.637,
+            "y": 327.712
+          },
+          {
+            "id": "adult-still",
+            "opacity": 0,
+            "x": 627.315,
+            "y": 311.816
+          }
+        ]
+      }
+    },
+    {
+      "name": "disabling reduced motion after interruption does not replay",
+      "status": "passed",
+      "evidence": {
+        "state": "complete",
+        "animations": [],
+        "original": "0",
+        "layersVisible": "visible",
+        "width": 1328,
+        "height": 443,
+        "overflow": false,
+        "layers": [
+          {
+            "id": "child-still",
+            "opacity": 1,
+            "x": 369.296,
+            "y": 347.277
+          },
+          {
+            "id": "child-travel",
+            "opacity": 0,
+            "x": 369.296,
+            "y": 347.277
+          },
+          {
+            "id": "teen-still",
+            "opacity": 1,
+            "x": 494.637,
+            "y": 327.712
+          },
+          {
+            "id": "teen-travel",
+            "opacity": 0,
+            "x": 494.637,
+            "y": 327.712
+          },
+          {
+            "id": "adult-still",
+            "opacity": 1,
+            "x": 627.315,
+            "y": 311.816
+          }
+        ]
+      }
+    },
+    {
+      "name": "responsive 1440px",
+      "status": "passed",
+      "evidence": {
+        "state": "complete",
+        "animations": [],
+        "original": "0",
+        "layersVisible": "visible",
+        "width": 1328,
+        "height": 443,
+        "overflow": false,
+        "layers": [
+          {
+            "id": "child-still",
+            "opacity": 1,
+            "x": 369.296,
+            "y": 347.277
+          },
+          {
+            "id": "child-travel",
+            "opacity": 0,
+            "x": 369.296,
+            "y": 347.277
+          },
+          {
+            "id": "teen-still",
+            "opacity": 1,
+            "x": 494.637,
+            "y": 327.712
+          },
+          {
+            "id": "teen-travel",
+            "opacity": 0,
+            "x": 494.637,
+            "y": 327.712
+          },
+          {
+            "id": "adult-still",
+            "opacity": 1,
+            "x": 627.315,
+            "y": 311.816
+          }
+        ]
+      }
+    },
+    {
+      "name": "responsive 768px",
+      "status": "passed",
+      "evidence": {
+        "state": "complete",
+        "animations": [],
+        "original": "0",
+        "layersVisible": "visible",
+        "width": 704,
+        "height": 235,
+        "overflow": false,
+        "layers": [
+          {
+            "id": "child-still",
+            "opacity": 1,
+            "x": 195.772,
+            "y": 184.095
+          },
+          {
+            "id": "child-travel",
+            "opacity": 0,
+            "x": 195.772,
+            "y": 184.095
+          },
+          {
+            "id": "teen-still",
+            "opacity": 1,
+            "x": 262.217,
+            "y": 173.723
+          },
+          {
+            "id": "teen-travel",
+            "opacity": 0,
+            "x": 262.217,
+            "y": 173.723
+          },
+          {
+            "id": "adult-still",
+            "opacity": 1,
+            "x": 332.552,
+            "y": 165.297
+          }
+        ]
+      }
+    },
+    {
+      "name": "responsive 390px",
+      "status": "passed",
+      "evidence": {
+        "state": "complete",
+        "animations": [],
+        "original": "0",
+        "layersVisible": "visible",
+        "width": 350,
+        "height": 117,
+        "overflow": false,
+        "layers": [
+          {
+            "id": "child-still",
+            "opacity": 1,
+            "x": 97.3297,
+            "y": 91.5204
+          },
+          {
+            "id": "child-travel",
+            "opacity": 0,
+            "x": 97.3297,
+            "y": 91.5204
+          },
+          {
+            "id": "teen-still",
+            "opacity": 1,
+            "x": 130.364,
+            "y": 86.3643
+          },
+          {
+            "id": "teen-travel",
+            "opacity": 0,
+            "x": 130.364,
+            "y": 86.3643
+          },
+          {
+            "id": "adult-still",
+            "opacity": 1,
+            "x": 165.331,
+            "y": 82.175
+          }
+        ]
+      }
+    },
+    {
+      "name": "responsive 320px",
+      "status": "passed",
+      "evidence": {
+        "state": "complete",
+        "animations": [],
+        "original": "0",
+        "layersVisible": "visible",
+        "width": 280,
+        "height": 93,
+        "overflow": false,
+        "layers": [
+          {
+            "id": "child-still",
+            "opacity": 1,
+            "x": 77.8637,
+            "y": 73.2188
+          },
+          {
+            "id": "child-travel",
+            "opacity": 0,
+            "x": 77.8637,
+            "y": 73.2188
+          },
+          {
+            "id": "teen-still",
+            "opacity": 1,
+            "x": 104.291,
+            "y": 69.0938
+          },
+          {
+            "id": "teen-travel",
+            "opacity": 0,
+            "x": 104.291,
+            "y": 69.0938
+          },
+          {
+            "id": "adult-still",
+            "opacity": 1,
+            "x": 132.265,
+            "y": 65.7422
+          }
+        ]
+      }
+    },
+    {
+      "name": "work and blog navigation",
+      "status": "passed",
+      "evidence": {
+        "url": "http://127.0.0.1:3000/#writing"
+      }
+    },
+    {
+      "name": "basketball click scores and returns to rest",
+      "status": "passed",
+      "evidence": {
+        "state": "rest"
+      }
+    },
+    {
+      "name": "initial reduced motion",
+      "status": "passed",
+      "evidence": {
+        "state": "fallback",
+        "animations": [],
+        "original": "1",
+        "layersVisible": "hidden",
+        "width": 1328,
+        "height": 443,
+        "overflow": false,
+        "layers": [
+          {
+            "id": "child-still",
+            "opacity": 0,
+            "x": 369.296,
+            "y": 347.277
+          },
+          {
+            "id": "child-travel",
+            "opacity": 0,
+            "x": 369.296,
+            "y": 347.277
+          },
+          {
+            "id": "teen-still",
+            "opacity": 0,
+            "x": 494.637,
+            "y": 327.712
+          },
+          {
+            "id": "teen-travel",
+            "opacity": 0,
+            "x": 494.637,
+            "y": 327.712
+          },
+          {
+            "id": "adult-still",
+            "opacity": 0,
+            "x": 627.315,
+            "y": 311.816
+          }
+        ]
+      }
+    },
+    {
+      "name": "no JavaScript",
+      "status": "passed",
+      "evidence": {
+        "state": "fallback",
+        "animations": [],
+        "original": "1",
+        "layersVisible": "hidden",
+        "width": 1328,
+        "height": 443,
+        "overflow": false,
+        "layers": [
+          {
+            "id": "child-still",
+            "opacity": 0,
+            "x": 369.296,
+            "y": 347.277
+          },
+          {
+            "id": "child-travel",
+            "opacity": 0,
+            "x": 369.296,
+            "y": 347.277
+          },
+          {
+            "id": "teen-still",
+            "opacity": 0,
+            "x": 494.637,
+            "y": 327.712
+          },
+          {
+            "id": "teen-travel",
+            "opacity": 0,
+            "x": 494.637,
+            "y": 327.712
+          },
+          {
+            "id": "adult-still",
+            "opacity": 0,
+            "x": 627.315,
+            "y": 311.816
+          }
+        ]
+      }
+    },
+    {
+      "name": "missing sprite",
+      "status": "passed",
+      "evidence": {
+        "state": "fallback",
+        "animations": [],
+        "original": "1",
+        "layersVisible": "hidden",
+        "width": 1328,
+        "height": 443,
+        "overflow": false,
+        "layers": [
+          {
+            "id": "child-still",
+            "opacity": 0,
+            "x": 369.296,
+            "y": 347.277
+          },
+          {
+            "id": "child-travel",
+            "opacity": 0,
+            "x": 369.296,
+            "y": 347.277
+          },
+          {
+            "id": "teen-still",
+            "opacity": 0,
+            "x": 494.637,
+            "y": 327.712
+          },
+          {
+            "id": "teen-travel",
+            "opacity": 0,
+            "x": 494.637,
+            "y": 327.712
+          },
+          {
+            "id": "adult-still",
+            "opacity": 0,
+            "x": 627.315,
+            "y": 311.816
+          }
+        ]
+      }
+    },
+    {
+      "name": "runtime image failure cancels animation and restores original",
+      "status": "passed",
+      "evidence": {
+        "state": "fallback",
+        "animations": [],
+        "original": "1",
+        "layersVisible": "hidden",
+        "width": 1328,
+        "height": 443,
+        "overflow": false,
+        "layers": [
+          {
+            "id": "child-still",
+            "opacity": 0,
+            "x": 369.296,
+            "y": 347.277
+          },
+          {
+            "id": "child-travel",
+            "opacity": 0,
+            "x": 369.296,
+            "y": 347.277
+          },
+          {
+            "id": "teen-still",
+            "opacity": 0,
+            "x": 494.637,
+            "y": 327.712
+          },
+          {
+            "id": "teen-travel",
+            "opacity": 0,
+            "x": 494.637,
+            "y": 327.712
+          },
+          {
+            "id": "adult-still",
+            "opacity": 0,
+            "x": 627.315,
+            "y": 311.816
+          }
+        ]
+      }
+    },
+    {
+      "name": "original stays visible while a layer is pending",
+      "status": "passed",
+      "evidence": {
+        "state": "fallback",
+        "animations": [],
+        "original": "1",
+        "layersVisible": "hidden",
+        "width": 1328,
+        "height": 443,
+        "overflow": false,
+        "layers": [
+          {
+            "id": "child-still",
+            "opacity": 0,
+            "x": 369.296,
+            "y": 347.277
+          },
+          {
+            "id": "child-travel",
+            "opacity": 0,
+            "x": 369.296,
+            "y": 347.277
+          },
+          {
+            "id": "teen-still",
+            "opacity": 0,
+            "x": 494.637,
+            "y": 327.712
+          },
+          {
+            "id": "teen-travel",
+            "opacity": 0,
+            "x": 494.637,
+            "y": 327.712
+          },
+          {
+            "id": "adult-still",
+            "opacity": 0,
+            "x": 627.315,
+            "y": 311.816
+          }
+        ]
+      }
+    },
+    {
+      "name": "late asset starts the timeline without layout shift",
+      "status": "passed",
+      "evidence": {
+        "before": {
+          "x": 56,
+          "y": 278.265625,
+          "width": 1328,
+          "height": 442.65625
+        },
+        "after": {
+          "x": 56,
+          "y": 278.265625,
+          "width": 1328,
+          "height": 442.65625
+        }
+      }
+    },
+    {
+      "name": "history return after partial playback shows final",
+      "status": "passed",
+      "evidence": {
+        "state": "complete",
+        "animations": [],
+        "original": "0",
+        "layersVisible": "visible",
+        "width": 1328,
+        "height": 443,
+        "overflow": false,
+        "layers": [
+          {
+            "id": "child-still",
+            "opacity": 1,
+            "x": 369.296,
+            "y": 347.277
+          },
+          {
+            "id": "child-travel",
+            "opacity": 0,
+            "x": 369.296,
+            "y": 347.277
+          },
+          {
+            "id": "teen-still",
+            "opacity": 1,
+            "x": 494.637,
+            "y": 327.712
+          },
+          {
+            "id": "teen-travel",
+            "opacity": 0,
+            "x": 494.637,
+            "y": 327.712
+          },
+          {
+            "id": "adult-still",
+            "opacity": 1,
+            "x": 627.315,
+            "y": 311.816
+          }
+        ]
+      }
+    },
+    {
+      "name": "no uncaught browser errors",
+      "status": "passed",
+      "evidence": []
+    }
+  ],
+  "errors": []
+}

@@ -1,0 +1,26 @@
+[Unit]
+Description=JIUHENG portfolio and blog
+After=network-online.target postgresql.service
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=jiuheng
+Group=jiuheng
+WorkingDirectory=/srv/jiuheng/app
+Environment=NODE_ENV=production
+Environment=PATH=/usr/local/bin:/usr/bin:/bin
+EnvironmentFile=/etc/jiuheng/jiuheng.env
+ExecStart=/usr/bin/env pnpm start
+Restart=on-failure
+RestartSec=5
+TimeoutStopSec=20
+KillSignal=SIGTERM
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ProtectHome=true
+ReadWritePaths=/srv/jiuheng/uploads
+
+[Install]
+WantedBy=multi-user.target

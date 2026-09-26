@@ -1,4 +1,12 @@
 allowBuilds:
-  esbuild: set this to true or false
-  sharp: set this to true or false
-  workerd: set this to true or false
+  '@embedded-postgres/darwin-arm64': true
+  '@embedded-postgres/darwin-x64': false
+  '@embedded-postgres/linux-arm': false
+  '@embedded-postgres/linux-arm64': false
+  '@embedded-postgres/linux-ia32': false
+  '@embedded-postgres/linux-ppc64': false
+  '@embedded-postgres/linux-x64': false
+  '@embedded-postgres/windows-x64': false
+  esbuild: false
+  sharp: false
+  workerd: false

@@ -1,0 +1,68 @@
+{
+  "child": {
+    "canvas": [
+      2172,
+      724
+    ],
+    "foot": [
+      604,
+      568
+    ],
+    "alpha_range": [
+      0,
+      255
+    ],
+    "transparent_pixels": 1565865,
+    "translucent_pixels": 6166,
+    "bounds": [
+      450,
+      441,
+      629,
+      625
+    ]
+  },
+  "teen": {
+    "canvas": [
+      2172,
+      724
+    ],
+    "foot": [
+      809,
+      536
+    ],
+    "alpha_range": [
+      0,
+      255
+    ],
+    "transparent_pixels": 1564096,
+    "translucent_pixels": 7915,
+    "bounds": [
+      663,
+      369,
+      826,
+      597
+    ]
+  },
+  "adult": {
+    "canvas": [
+      2172,
+      724
+    ],
+    "foot": [
+      1026,
+      510
+    ],
+    "alpha_range": [
+      0,
+      255
+    ],
+    "transparent_pixels": 1561746,
+    "translucent_pixels": 10278,
+    "bounds": [
+      888,
+      298,
+      1052,
+      546
+    ]
+  }
+}

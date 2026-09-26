@@ -1,22 +1,85 @@
-import { ArrowUpRight } from 'lucide-react';
+import Link from 'next/link';
 import { SiteHeader } from '@/components/site-header';
-
-const posts = [
-  { no:'01', date:'2026.08.21', category:'设计笔记', title:'一个作品什么时候才算真正完成？', excerpt:'完成不只是交付文件，也意味着知道哪些问题已经解决，哪些问题被有意识地留到下一次。', featured:true },
-  { no:'02', date:'2026.07.09', category:'过程记录', title:'从模糊想法到可以使用的产品', excerpt:'记录一次个人项目从草图、取舍到原型的完整过程。' },
-  { no:'03', date:'2026.05.16', category:'随笔', title:'我如何整理视觉参考', excerpt:'收藏不是终点。只有建立分类、写下判断，参考才会真正进入自己的工作方法。' },
-  { no:'04', date:'2026.03.02', category:'复盘', title:'重新设计自己的作品集', excerpt:'关于选择、删减和如何让作品自己说话。' },
-  { no:'05', date:'2025.12.18', category:'工具', title:'我的轻量创作工作流', excerpt:'用尽可能少的工具保持稳定输出。' },
-];
-
-export default function BlogPage(){return <main><SiteHeader label="02 / BLOG" />
-  <section className="page-intro blog-intro"><p>02 / NOTES & ESSAYS</p><h1>博客</h1><span>项目过程、设计判断和阶段性的个人思考。</span></section>
-  <section className="blog-index">
-    {posts.map((post)=><article className={`post-row ${post.featured?'featured-post':''}`} key={post.no}>
-      <span className="post-no">{post.no}</span>
-      <div className="post-body"><p>{post.category} · <time>{post.date}</time></p><h2>{post.title}</h2><span>{post.excerpt}</span></div>
-      <ArrowUpRight aria-hidden="true" />
-    </article>)}
-  </section>
-  <footer className="blog-footer"><strong>JIUHENG</strong><p>持续记录，持续更新。<br/>© 2026</p></footer>
-  </main>}
+import { PostList, SiteFooter } from '@/components/portfolio-content';
+import { listBlogPage } from '@/lib/server/posts';
+export const dynamic = 'force-dynamic';
+export const metadata = {
+  title: '博客 · JIUHENG',
+  description: '技术探索与思考随笔。',
+};
+export default async function BlogPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ page?: string; tag?: string }>;
+}) {
+  const query = await searchParams;
+  const page = Math.max(
+    1,
+    Math.min(100000, Number.parseInt(query.page || '1', 10) || 1),
+  );
+  const tag = typeof query.tag === 'string' ? query.tag.slice(0, 24) : '';
+  const data = await listBlogPage(page, tag).catch(() => null);
+  const url = (target: number) =>
+    `/blog?${new URLSearchParams({ ...(tag ? { tag } : {}), page: String(target) })}`;
+  return (
+    <div className="reading-site">
+      <SiteHeader active="blog" />
+      <main id="main-content" className="blog-index container">
+        <header className="blog-intro">
+          <p className="blog-eyebrow">WRITING &amp; NOTES</p>
+          <h1>
+            博客<span>。</span>
+          </h1>
+        </header>
+        {data ? (
+          <>
+            <nav className="tag-filter" aria-label="按标签筛选">
+              <Link href="/blog" aria-current={!tag ? 'page' : undefined}>
+                全部 <small>{data.total && !tag ? data.total : ''}</small>
+              </Link>
+              {[...new Set([...data.tags, ...(tag ? [tag] : [])])].map(
+                (item) => (
+                  <Link
+                    key={item}
+                    href={`/blog?tag=${encodeURIComponent(item)}`}
+                    aria-current={item === tag ? 'page' : undefined}
+                  >
+                    {item}
+                  </Link>
+                ),
+              )}
+            </nav>
+            {tag && !data.posts.length ? (
+              <p className="blog-notice">暂无带有“{tag}”标签的文章。</p>
+            ) : (
+              <PostList posts={data.posts} />
+            )}
+            {data.pages > 1 && (
+              <nav className="blog-pagination" aria-label="文章分页">
+                {data.page > 1 ? (
+                  <Link href={url(data.page - 1)}>← 上一页</Link>
+                ) : (
+                  <span />
+                )}
+                <span>
+                  {data.page} / {data.pages}
+                </span>
+                {data.page < data.pages ? (
+                  <Link href={url(data.page + 1)}>下一页 →</Link>
+                ) : (
+                  <span />
+                )}
+              </nav>
+            )}
+          </>
+        ) : (
+          <output className="blog-notice">
+            <strong>文章暂时无法加载</strong>
+            <p>请稍后刷新重试。</p>
+          </output>
+        )}
+      </main>
+      <SiteFooter />
+    </div>
+  );
+}
