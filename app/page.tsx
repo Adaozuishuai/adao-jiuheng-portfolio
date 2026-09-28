@@ -6,7 +6,7 @@ import { HeroIntro } from '@/components/hero-intro';
 import { SiteHeader } from '@/components/site-header';
 import { PostList } from '@/components/portfolio-content';
 import { BasketballScene } from '@/components/home/basketball-scene';
-import { AboutGrowth } from '@/components/home/about-growth';
+import { FeaturedWorkGallery } from '@/components/featured-work-gallery';
 import { projects, projectVisuals } from '@/lib/content';
 import { listPublished } from '@/lib/server/posts';
 import './home.css';
@@ -66,64 +66,15 @@ export default async function Home() {
           )}
         </section>
         <section
-          className="home-about home-container home-section"
-          aria-label="关于我"
-        >
-          <Label number="02">ABOUT</Label>
-          <p className="about-motto">
-            What matters is who you become. Be fearless. Go for it.
-          </p>
-          <AboutGrowth />
-        </section>
-        <section
           className="home-section home-container"
           id="featured"
           aria-labelledby="work-title"
         >
-          <Label number="03">SELECTED WORK</Label>
+          <Label number="02">SELECTED WORK</Label>
           <div className="home-heading">
             <h2 id="work-title">精选作品</h2>
           </div>
-          <div className="editorial-work-grid">
-            {projects.map((project, i) => (
-              <Link
-                className={`editorial-project project-${i + 1}`}
-                key={project.id}
-                href={`/work/${project.id}`}
-                aria-label={`查看作品：${project.title}`}
-              >
-                {projectVisuals[project.id].src ? (
-                  <Image
-                    src={projectVisuals[project.id].src!}
-                    alt={projectVisuals[project.id].alt}
-                    fill
-                    loading={i === 0 ? 'eager' : 'lazy'}
-                    sizes={
-                      i === 1
-                        ? '(max-width: 700px) 100vw, 38vw'
-                        : '(max-width: 700px) 100vw, 60vw'
-                    }
-                  />
-                ) : (
-                  <div className="project-system-art" aria-hidden="true">
-                    {project.mark}
-                  </div>
-                )}
-                <div className="editorial-project-copy">
-                  <span className="project-index">0{i + 1}</span>
-                  <div>
-                    <h3>{project.title}</h3>
-                    <p>{project.category}</p>
-                  </div>
-                  <p className="project-meta">
-                    {projectVisuals[project.id].label}
-                    <br />
-                    {projectVisuals[project.id].detail}
-                  </p>
-                </div>
-              </Link>
-            ))}
-          </div>
+          <FeaturedWorkGallery projects={projects} visuals={projectVisuals} />
           <p className="concept-note">概念探索 / CONCEPT STUDIES</p>
         </section>
       </main>
