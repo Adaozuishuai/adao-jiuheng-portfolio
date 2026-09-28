@@ -514,7 +514,11 @@ export function FeaturedWorkGallery({ projects, visuals }: Props) {
               aria-label="上一项作品"
               disabled={selected === 0}
               onKeyDown={onKeyDown}
-              onClick={() => command.current(selectedRef.current - 1)}
+              onPointerUp={() => command.current(selectedRef.current - 1)}
+              onClick={(event) => {
+                if (event.detail === 0)
+                  command.current(selectedRef.current - 1);
+              }}
             >
               <ArrowLeft size={20} aria-hidden="true" />
             </button>
@@ -523,7 +527,11 @@ export function FeaturedWorkGallery({ projects, visuals }: Props) {
               aria-label="下一项作品"
               disabled={selected === projects.length - 1}
               onKeyDown={onKeyDown}
-              onClick={() => command.current(selectedRef.current + 1)}
+              onPointerUp={() => command.current(selectedRef.current + 1)}
+              onClick={(event) => {
+                if (event.detail === 0)
+                  command.current(selectedRef.current + 1);
+              }}
             >
               <ArrowRight size={20} aria-hidden="true" />
             </button>
