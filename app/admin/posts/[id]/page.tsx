@@ -27,6 +27,7 @@ export default async function EditPage({
         excerpt: post.draftExcerpt,
         tags: post.draftTags,
         content: post.draftContent,
+        toc: post.draftToc,
         coverAssetId: post.draftCoverAssetId,
         version: post.version,
         status: post.status,

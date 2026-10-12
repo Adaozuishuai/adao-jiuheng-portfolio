@@ -4,7 +4,7 @@
 .project-cover { position: relative; }
 .project-hoop { position: absolute; inset: 0; pointer-events: none; }
 .project-cover-stage .physical-hoop { position: absolute; width: 124px; height: auto; left: 50%; top: 0; margin: 0; transform: translateX(-50%); overflow: visible; }
-.hoop-heart { position: absolute; top: 34px; left: calc(50% + 48px); width: 42px; height: 42px; padding: 10px; border-radius: 50% 50% 50% 6px; background: #fff9f1; color: var(--red); box-shadow: 0 3px 14px #542f2420; animation: hoop-heart-rise 1.5s ease-out both; }
+.hoop-heart { position: absolute; top: 34px; left: calc(50% + 48px); width: 42px; height: 42px; padding: 10px; border-radius: 50% 50% 50% 6px; background: #f3f6fa; color: var(--red); box-shadow: 0 3px 14px #182b4920; animation: hoop-heart-rise 1.5s ease-out both; }
 .hoop-heart svg { display: block; width: 100%; height: 100%; }
 @keyframes hoop-heart-rise { 0% { opacity: 0; transform: translateY(16px) scale(.5); } 20% { opacity: 1; transform: translateY(0) scale(1.08); } 40% { opacity: 1; transform: translateY(-5px) scale(1); } 100% { opacity: 0; transform: translateY(-35px) scale(.9); } }
 @media(prefers-reduced-motion: reduce) { .hoop-heart { animation: none; } }
@@ -17,11 +17,11 @@
 @media(max-width:700px) { .physical-hoop { width: 98px; } }
 
 :root {
-  --paper: #ececea;
-  --ink: #1e1e1e;
-  --red: #B7473F;
-  --muted: #626260;
-  --line: #cececa;
+  --paper: #f3f6fa;
+  --ink: #182b49;
+  --red: #315fa8;
+  --muted: #5c6c82;
+  --line: #d6dfea;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif;
   color: var(--ink);
   background: var(--paper);
@@ -57,11 +57,11 @@ a:focus-visible { outline: 2px solid var(--ink); outline-offset: 5px; border-rad
 .project-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 48px 32px; }
 .project-card { min-width: 0; }
 .project-cover { aspect-ratio: 4 / 3; display: grid; place-items: center; overflow: hidden; }
-.project-cover span { font-family: Georgia, 'Times New Roman', serif; font-size: clamp(3rem, 9vw, 9rem); letter-spacing: -.07em; color: #535653; }
-.tone-stone { background: #dddfda; }
-.tone-slate { background: #d0d6d9; }
-.tone-sand { background: #dfdbd4; }
-.tone-silver { background: #d9d9d7; }
+.project-cover span { font-family: Georgia, 'Times New Roman', serif; font-size: clamp(3rem, 9vw, 9rem); letter-spacing: -.07em; color: #5c6c82; }
+.tone-stone { background: #e5ecf5; }
+.tone-slate { background: #d4dfec; }
+.tone-sand { background: #e1e8f2; }
+.tone-silver { background: #dce5ef; }
 .project-caption { padding-top: 18px; }
 .project-caption h2, .project-caption h3 { margin: 0 0 4px; font-size: 1.375rem; font-weight: 500; line-height: 1.45; }
 .project-caption p { margin: 0; color: var(--muted); }
@@ -89,7 +89,7 @@ a:focus-visible { outline: 2px solid var(--ink); outline-offset: 5px; border-rad
 .basketball-hit-target:focus-visible { outline: 2px solid var(--ink); outline-offset: 5px; }
 .basketball-fallback { display: block; width: 100%; height: 100%; transform: rotate(var(--basketball-angle, 0rad)); filter: drop-shadow(0 8px 8px rgba(28,19,14,.2)); will-change: transform; }
 .basketball-controls { position: fixed; right: 18px; bottom: 18px; z-index: 3; display: flex; gap: 6px; pointer-events: auto; }
-.basketball-controls button { min-height: 34px; padding: 6px 10px; border: 1px solid rgba(30,30,30,.24); border-radius: 999px; background: rgba(236,236,234,.82); color: var(--muted); font-size: .75rem; line-height: 1; cursor: pointer; backdrop-filter: blur(10px); }
+.basketball-controls button { min-height: 34px; padding: 6px 10px; border: 1px solid rgba(30,30,30,.24); border-radius: 999px; background: rgba(243,246,250,.82); color: var(--muted); font-size: .75rem; line-height: 1; cursor: pointer; backdrop-filter: blur(10px); }
 .basketball-controls button:hover { color: var(--ink); border-color: rgba(30,30,30,.52); }
 .basketball-world.is-hidden .basketball-canvas,
 .basketball-world.is-hidden .basketball-shadow,
@@ -107,7 +107,7 @@ a:focus-visible { outline: 2px solid var(--ink); outline-offset: 5px; border-rad
 .detail-back:hover { text-decoration: underline; text-underline-offset: 5px; }
 .work-detail h1 { overflow-wrap: anywhere; }
 .project-pending { margin-block: 32px; color: var(--muted); }
-.project-system-art { position: absolute; inset: 0; display: flex; align-items: center; justify-content: flex-end; padding: 5%; background: linear-gradient(135deg, #e2e5e3, #b7bfbe); color: #616d69; font-size: clamp(72px, 15vw, 200px); font-weight: 500; letter-spacing: -.08em; }
+.project-system-art { position: absolute; inset: 0; display: flex; align-items: center; justify-content: flex-end; padding: 5%; background: linear-gradient(135deg, #e5ecf5, #b7c8df); color: #5c6c82; font-size: clamp(72px, 15vw, 200px); font-weight: 500; letter-spacing: -.08em; }
 .detail-system-art { position: relative; aspect-ratio: 8 / 5; justify-content: center; font-size: clamp(72px, 15vw, 160px); }
 .site-footer { display: flex; align-items: center; justify-content: space-between; gap: 24px; }
 .site-footer nav { display: flex; gap: 24px; }
@@ -123,8 +123,8 @@ a:focus-visible { outline: 2px solid var(--ink); outline-offset: 5px; border-rad
 .article-content h3 { margin: 2em 0 .6em; font-size: 1.35rem; }
 .article-content a { color: var(--red); text-decoration: underline; text-underline-offset: 3px; }
 .article-content blockquote { margin: 2em 0; padding-left: 20px; border-left: 3px solid var(--red); color: var(--muted); }
-.article-content pre { padding: 20px; overflow-x: auto; background: #252525; color: #f0efeb; border-radius: 4px; }
-.article-content :not(pre) > code { padding: .1em .35em; background: #deded9; border-radius: 3px; }
+.article-content pre { padding: 20px; overflow-x: auto; background: #182b49; color: #eef3fa; border-radius: 4px; }
+.article-content :not(pre) > code { padding: .1em .35em; background: #e5ecf5; border-radius: 3px; }
 .article-content figure { margin: 2.5em 0; }
 .article-content figure img { display: block; width: 100%; height: auto; }
 .article-content figcaption { margin-top: 8px; color: var(--muted); font-size: .875rem; }

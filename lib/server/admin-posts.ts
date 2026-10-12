@@ -10,6 +10,7 @@ import {
   validateDocument,
 } from '@/lib/blog/document';
 import type { PostSnapshot, RevisionKind } from '@/lib/blog/types';
+import { parseAiToc } from '@/lib/blog/ai-toc';
 import { getDb } from './db';
 import { readAsset } from './storage';
 
@@ -37,6 +38,7 @@ function draftSnapshot(post: Post): PostSnapshot {
     tags: post.draftTags,
     coverAssetId: post.draftCoverAssetId,
     content: post.draftContent,
+    toc: post.draftToc,
   };
 }
 
@@ -49,6 +51,7 @@ function publishedSnapshot(post: Post): PostSnapshot | null {
     tags: post.publishedTags,
     coverAssetId: post.publishedCoverAssetId,
     content: post.publishedContent,
+    toc: post.publishedToc,
   };
 }
 
@@ -75,8 +78,10 @@ function parseSnapshot(
     });
   const tags = [...new Set((input.tags as string[]).map((tag) => tag.trim()))];
   let content;
+  let toc;
   try {
     content = validateDocument(input.content);
+    toc = parseAiToc(input.toc, content);
   } catch (error) {
     throw new Response((error as Error).message, { status: 400 });
   }
@@ -90,6 +95,7 @@ function parseSnapshot(
     tags,
     coverAssetId: cover as string | null,
     content,
+    toc,
   };
 }
 
@@ -101,6 +107,7 @@ function snapshotInput(snapshot: PostSnapshot): Record<string, unknown> {
     tags: snapshot.tags,
     coverAssetId: snapshot.coverAssetId,
     content: snapshot.content,
+    toc: snapshot.toc,
   };
 }
 
@@ -225,6 +232,7 @@ export async function changePost(id: string, input: Record<string, unknown>) {
           draftExcerpt: snapshot.excerpt,
           draftTags: snapshot.tags,
           draftContent: snapshot.content,
+          draftToc: snapshot.toc,
           draftCoverAssetId: snapshot.coverAssetId,
         })
         .where(eq(posts.id, id))
@@ -272,12 +280,14 @@ export async function changePost(id: string, input: Record<string, unknown>) {
           draftExcerpt: normalized.excerpt,
           draftTags: normalized.tags,
           draftContent: normalized.content,
+          draftToc: normalized.toc,
           draftCoverAssetId: normalized.coverAssetId,
           publishedSlug: slug,
           publishedTitle: normalized.title,
           publishedExcerpt: normalized.excerpt,
           publishedTags: normalized.tags,
           publishedContent: normalized.content,
+          publishedToc: normalized.toc,
           publishedCoverAssetId: normalized.coverAssetId,
           firstPublishedAt: post.firstPublishedAt ?? now,
           lastPublishedAt: now,
@@ -461,6 +471,7 @@ export async function restorePostRevision(
         draftExcerpt: snapshot.excerpt,
         draftTags: snapshot.tags,
         draftContent: snapshot.content,
+        draftToc: snapshot.toc,
         draftCoverAssetId: snapshot.coverAssetId,
         ...(publishing
           ? {
@@ -468,6 +479,7 @@ export async function restorePostRevision(
               publishedExcerpt: snapshot.excerpt,
               publishedTags: snapshot.tags,
               publishedContent: snapshot.content,
+              publishedToc: snapshot.toc,
               publishedCoverAssetId: snapshot.coverAssetId,
               lastPublishedAt: now,
             }

@@ -30,6 +30,7 @@ export default async function PreviewPage({
         excerpt={post.draftExcerpt}
         tags={post.draftTags}
         content={post.draftContent}
+        toc={post.draftToc}
         coverAssetId={post.draftCoverAssetId}
         backHref={`/admin/posts/${id}`}
         backLabel="继续编辑"

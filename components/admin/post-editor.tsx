@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useEffectEvent, useRef, useState } from 'react';
 import { flushSync } from 'react-dom';
 import { EditorContent, useEditor } from '@tiptap/react';
 import StarterKit from '@tiptap/starter-kit';
@@ -71,6 +71,12 @@ type MutationResult = {
   updatedAt: string;
   snapshot?: PostSnapshot;
 };
+type AiCandidate = {
+  title: string;
+  excerpt: string;
+  toc: NonNullable<PostSnapshot['toc']>;
+  version: number;
+};
 
 const revisionLabels: Record<RevisionKind, string> = {
   auto: '自动存档',
@@ -107,6 +113,12 @@ export function PostEditor({ initial }: { initial: Draft }) {
   const [saveState, setSaveState] = useState<SaveState>('saved');
   const [lastSavedAt, setLastSavedAt] = useState<Date | null>(null);
   const [editTick, setEditTick] = useState(0);
+  const [bodyTick, setBodyTick] = useState(0);
+  const [aiCandidate, setAiCandidate] = useState<AiCandidate | null>(null);
+  const [aiState, setAiState] = useState<
+    'idle' | 'loading' | 'ready' | 'error'
+  >('idle');
+  const [aiError, setAiError] = useState('');
   const [blocking, setBlocking] = useState(false);
   const [message, setMessage] = useState('');
   const [inputNotice, setInputNotice] = useState('');
@@ -124,6 +136,8 @@ export function PostEditor({ initial }: { initial: Draft }) {
   const tagTextRef = useRef(initial.tags.join('，'));
   const dirtyRef = useRef(false);
   const editSerialRef = useRef(0);
+  const bodySerialRef = useRef(0);
+  const lastSuggestedBodyRef = useRef('');
   const editorRef = useRef<ReturnType<typeof useEditor>>(null);
   const savePromiseRef = useRef<Promise<boolean> | null>(null);
   const publishingRef = useRef(false);
@@ -144,6 +158,15 @@ export function PostEditor({ initial }: { initial: Draft }) {
     setSaveState('dirty');
     setMessage('');
     setEditTick((value) => value + 1);
+  }
+
+  function markBodyDirty() {
+    bodySerialRef.current += 1;
+    setBodyTick((value) => value + 1);
+    setAiCandidate(null);
+    setAiState('idle');
+    if (draftRef.current.toc) setDraft({ ...draftRef.current, toc: null });
+    markDirty();
   }
 
   const editor = useEditor({
@@ -229,7 +252,7 @@ export function PostEditor({ initial }: { initial: Draft }) {
         return true;
       },
     },
-    onUpdate: markDirty,
+    onUpdate: markBodyDirty,
     onTransaction: () => uploadQueue.sync(),
   });
   useEffect(() => {
@@ -262,6 +285,7 @@ export function PostEditor({ initial }: { initial: Draft }) {
       tags: tagsFrom(tagTextRef.current),
       coverAssetId: draftRef.current.coverAssetId,
       content: savedDocument(editorRef.current!.getJSON()),
+      toc: draftRef.current.toc,
     };
   }
 
@@ -340,6 +364,78 @@ export function PostEditor({ initial }: { initial: Draft }) {
     const timer = window.setTimeout(() => void saveDraft('auto'), 1500);
     return () => window.clearTimeout(timer);
   }, [blocking, dirty, editTick]);
+
+  async function generateAi() {
+    if (
+      !editorRef.current ||
+      blocking ||
+      pendingImages ||
+      aiState === 'loading'
+    )
+      return;
+    const body = JSON.stringify(savedDocument(editorRef.current.getJSON()));
+    if (!body || body === lastSuggestedBodyRef.current) return;
+    const serial = bodySerialRef.current;
+    lastSuggestedBodyRef.current = body;
+    setAiState('loading');
+    setAiError('');
+    if (!(await saveDraft('auto'))) {
+      lastSuggestedBodyRef.current = '';
+      setAiState('error');
+      setAiError('请先保存草稿，再重试 AI 整理');
+      return;
+    }
+    if (serial !== bodySerialRef.current) {
+      setAiState('idle');
+      return;
+    }
+    try {
+      const response = await fetch(
+        `/api/admin/posts/${draftRef.current.id}/ai-suggest`,
+        {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ version: draftRef.current.version }),
+        },
+      );
+      const result = await response.json();
+      if (serial !== bodySerialRef.current) return;
+      if (!response.ok) throw new Error(result.error || 'AI 整理失败');
+      setAiCandidate(result as AiCandidate);
+      setAiState('ready');
+    } catch (caught) {
+      if (serial !== bodySerialRef.current) return;
+      setAiError((caught as Error).message);
+      setAiState('error');
+    }
+  }
+  const generateAiEvent = useEffectEvent(generateAi);
+
+  useEffect(() => {
+    if (!bodyTick || blocking || pendingImages) return;
+    const timer = window.setTimeout(() => void generateAiEvent(), 30_000);
+    return () => window.clearTimeout(timer);
+  }, [bodyTick, blocking, pendingImages]);
+
+  function applyAiCandidate() {
+    if (!aiCandidate || !editorRef.current) return;
+    const body = JSON.stringify(savedDocument(editorRef.current.getJSON()));
+    if (body !== lastSuggestedBodyRef.current) {
+      setAiCandidate(null);
+      setAiState('idle');
+      return;
+    }
+    setDraft({
+      ...draftRef.current,
+      title: aiCandidate.title,
+      excerpt: aiCandidate.excerpt,
+      toc: aiCandidate.toc,
+    });
+    setAiCandidate(null);
+    setAiState('idle');
+    markDirty();
+    setMessage('AI 建议已写入草稿，请预览后手动发布');
+  }
 
   useEffect(() => {
     if (!dirty && !pendingImages) return;
@@ -607,6 +703,11 @@ export function PostEditor({ initial }: { initial: Draft }) {
       editorRef.current?.commands.setContent(restored.content, {
         emitUpdate: false,
       });
+      bodySerialRef.current += 1;
+      lastSuggestedBodyRef.current = '';
+      setAiCandidate(null);
+      setAiState('idle');
+      setBodyTick((value) => value + 1);
       tagTextRef.current = restored.tags.join('，');
       setTagTextState(tagTextRef.current);
       setDraft({
@@ -714,6 +815,7 @@ export function PostEditor({ initial }: { initial: Draft }) {
         tags: tagsFrom(tagText),
         coverAssetId: draft.coverAssetId,
         content: savedDocument(editor.getJSON()),
+        toc: draft.toc,
       }
     : null;
 
@@ -839,6 +941,67 @@ export function PostEditor({ initial }: { initial: Draft }) {
           </button>
         </div>
         <EditorContent editor={editor} />
+      </section>
+
+      <section className="ai-editor-panel" aria-label="AI 整理建议">
+        <h2>AI 整理</h2>
+        <p className="field-hint">
+          停止输入 30
+          秒后，根据已保存的正文生成标题、摘要和可跳转目录。建议仅在确认后写入草稿。
+        </p>
+        {aiState === 'loading' && <output>正在整理正文…</output>}
+        {aiState === 'error' && (
+          <div role="alert">
+            <p>{aiError}</p>
+            <button
+              className="admin-button"
+              onClick={() => {
+                lastSuggestedBodyRef.current = '';
+                void generateAi();
+              }}
+            >
+              重试整理
+            </button>
+          </div>
+        )}
+        {aiCandidate && (
+          <div className="ai-candidate">
+            <p>
+              <strong>标题：</strong>
+              {aiCandidate.title}
+            </p>
+            <p>
+              <strong>摘要：</strong>
+              {aiCandidate.excerpt}
+            </p>
+            <strong>目录：</strong>
+            <ol>
+              {aiCandidate.toc.items.map((item) => (
+                <li key={item.blockIndex}>{item.title}</li>
+              ))}
+            </ol>
+            <div className="admin-actions">
+              <button
+                className="admin-button primary"
+                onClick={applyAiCandidate}
+              >
+                应用到草稿
+              </button>
+              <button
+                className="admin-button"
+                onClick={() => {
+                  setAiCandidate(null);
+                  setAiState('idle');
+                }}
+              >
+                忽略
+              </button>
+            </div>
+          </div>
+        )}
+        {!aiCandidate && aiState === 'idle' && draft.toc && (
+          <output>已应用 AI 目录；修改正文后将重新整理。</output>
+        )}
       </section>
 
       <section className="editor-publish" aria-labelledby="publish-heading">

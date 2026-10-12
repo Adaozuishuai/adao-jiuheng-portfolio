@@ -4,6 +4,7 @@ import { once } from 'node:events';
 import { mkdtemp, rm } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { join, resolve } from 'node:path';
+import { createServer } from 'node:http';
 import nextEnv from '@next/env';
 import postgres from 'postgres';
 import { drizzle } from 'drizzle-orm/postgres-js';
@@ -28,6 +29,39 @@ const control = new URL(url);
 control.pathname = '/postgres';
 const admin = postgres(control.toString(), { onnotice: () => {} });
 const uploadDir = await mkdtemp(join(tmpdir(), 'jiuheng-auth-test-'));
+const modelServer = createServer(async (request, response) => {
+  let body = '';
+  for await (const chunk of request) body += chunk;
+  const prompt = JSON.parse(body).messages.at(-1).content;
+  if (prompt.includes('延迟响应'))
+    await new Promise((resolveDelay) => setTimeout(resolveDelay, 1500));
+  const blocks = JSON.parse(prompt);
+  const toc = blocks.slice(0, 2).map((block) => ({
+    title: `第 ${block.index + 1} 节`,
+    blockIndex: block.index,
+    quote: block.text.slice(0, 10),
+  }));
+  response.setHeader('Content-Type', 'application/json');
+  response.end(
+    JSON.stringify({
+      choices: [
+        {
+          message: {
+            content: JSON.stringify({
+              title: 'AI 整理标题',
+              excerpt: 'AI 根据正文生成的摘要。',
+              toc,
+            }),
+          },
+        },
+      ],
+    }),
+  );
+});
+await new Promise((resolveListen) =>
+  modelServer.listen(0, '127.0.0.1', resolveListen),
+);
+const modelPort = modelServer.address().port;
 url.pathname = `/${name}`;
 const env = {
   ...process.env,
@@ -35,6 +69,8 @@ const env = {
   SITE_URL: 'http://localhost:3101',
   UPLOAD_DIR: uploadDir,
   AUTH_TEST_ISOLATED: 'true',
+  ZHIPU_TEST_API_URL: `http://127.0.0.1:${modelPort}`,
+  ZHIPU_API_KEY: 'isolated-test-key',
   NODE_ENV: 'production',
 };
 let server;
@@ -91,4 +127,5 @@ try {
   await admin`DROP DATABASE IF EXISTS ${admin(name)} WITH (FORCE)`;
   await admin.end();
   await rm(uploadDir, { recursive: true, force: true });
+  modelServer.close();
 }

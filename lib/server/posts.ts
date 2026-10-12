@@ -13,6 +13,7 @@ export async function listPublished(limit?: number): Promise<PublishedPost[]> {
       tags: posts.publishedTags,
       coverAssetId: posts.publishedCoverAssetId,
       content: posts.publishedContent,
+      toc: posts.publishedToc,
       firstPublishedAt: posts.firstPublishedAt,
       lastPublishedAt: posts.lastPublishedAt,
     })
@@ -50,6 +51,7 @@ export async function getPublishedBySlug(
       tags: posts.publishedTags,
       coverAssetId: posts.publishedCoverAssetId,
       content: posts.publishedContent,
+      toc: posts.publishedToc,
       firstPublishedAt: posts.firstPublishedAt,
       lastPublishedAt: posts.lastPublishedAt,
     })

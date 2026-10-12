@@ -13,7 +13,7 @@ import {
   varchar,
 } from 'drizzle-orm/pg-core';
 import { sql } from 'drizzle-orm';
-import type { EditorDocument, PostSnapshot } from '@/lib/blog/types';
+import type { AiToc, EditorDocument, PostSnapshot } from '@/lib/blog/types';
 
 export const postStatus = pgEnum('post_status', ['draft', 'published']);
 export const revisionKind = pgEnum('revision_kind', [
@@ -35,12 +35,14 @@ export const posts = pgTable(
     draftTags: text('draft_tags').array().notNull().default([]),
     draftCoverAssetId: uuid('draft_cover_asset_id'),
     draftContent: jsonb('draft_content').$type<EditorDocument>().notNull(),
+    draftToc: jsonb('draft_toc').$type<AiToc>(),
     publishedTitle: text('published_title'),
     publishedSlug: varchar('published_slug', { length: 180 }),
     publishedExcerpt: text('published_excerpt'),
     publishedTags: text('published_tags').array().notNull().default([]),
     publishedCoverAssetId: uuid('published_cover_asset_id'),
     publishedContent: jsonb('published_content').$type<EditorDocument>(),
+    publishedToc: jsonb('published_toc').$type<AiToc>(),
     status: postStatus('status').notNull().default('draft'),
     version: integer('version').notNull().default(1),
     createdAt: timestamp('created_at', { withTimezone: true })

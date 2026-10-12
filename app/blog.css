@@ -1,9 +1,9 @@
 .reading-site {
-  --paper: #f2f0eb;
-  --ink: #262724;
-  --muted: #71716b;
-  --line: #d9d7cf;
-  --red: #a94b40;
+  --paper: #f3f6fa;
+  --ink: #182b49;
+  --muted: #5c6c82;
+  --line: #d6dfea;
+  --red: #315fa8;
   background: var(--paper);
   min-height: 100vh;
 }
@@ -201,7 +201,7 @@
   width: 36px;
   height: 36px;
   border-radius: 50%;
-  background: #e6e0d6;
+  background: #e5ecf5;
   color: var(--red);
   font:
     19px Georgia,
@@ -377,7 +377,7 @@
   position: absolute;
   top: 7px;
   right: 12px;
-  color: #e3e0d8;
+  color: #e3ebf6;
   font-size: 11px;
   border: 1px solid #777;
   padding: 3px 9px;
@@ -388,7 +388,7 @@
   position: absolute;
   top: 12px;
   left: 20px;
-  color: #bfbdb7;
+  color: #bccbdf;
   font-size: 11px;
 }
 .article-content .hljs-keyword,
@@ -409,7 +409,7 @@
   color: #a4c8dc;
 }
 .article-content .hljs-comment {
-  color: #aaa9a3;
+  color: #a9b8cc;
 }
 @media (max-width: 1100px) {
   .article-shell {
@@ -490,4 +490,9 @@
   .article-shell .article-page {
     padding-top: 0;
   }
+}
+.article-ai-anchor {
+  display: block;
+  height: 0;
+  scroll-margin-top: 100px;
 }

@@ -1,6 +1,6 @@
-import type { ReactNode } from 'react';
+import { Fragment, type ReactNode } from 'react';
 import Image from 'next/image';
-import type { EditorNode } from '@/lib/blog/types';
+import type { AiToc, EditorNode } from '@/lib/blog/types';
 import { nodeText, safeHref } from '@/lib/blog/document';
 import { CodeBlock } from './code-block';
 
@@ -78,10 +78,24 @@ function renderNode(node: EditorNode, key: string): ReactNode {
   }
 }
 
-export function ArticleContent({ document }: { document: EditorNode }) {
+export function ArticleContent({
+  document,
+  toc,
+}: {
+  document: EditorNode;
+  toc?: AiToc | null;
+}) {
+  const anchors = new Set(toc?.items.map((item) => item.blockIndex) ?? []);
   return (
     <div className="article-content">
-      {document.content?.map((node, index) => renderNode(node, String(index)))}
+      {document.content?.map((node, index) => (
+        <Fragment key={index}>
+          {anchors.has(index) && (
+            <span className="article-ai-anchor" id={`ai-section-${index}`} />
+          )}
+          {renderNode(node, String(index))}
+        </Fragment>
+      ))}
     </div>
   );
 }

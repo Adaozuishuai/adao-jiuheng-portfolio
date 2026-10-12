@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import Image from 'next/image';
-import type { EditorDocument } from '@/lib/blog/types';
+import type { AiToc, EditorDocument } from '@/lib/blog/types';
 import { headings } from '@/lib/blog/document';
 import { ArticleContent } from './article-content';
 import { ArticleToc } from './article-toc';
@@ -9,6 +9,7 @@ export function ArticleView({
   excerpt,
   tags,
   content,
+  toc: aiToc = null,
   coverAssetId,
   date,
   backHref = '/blog',
@@ -18,12 +19,19 @@ export function ArticleView({
   excerpt: string;
   tags: string[];
   content: EditorDocument;
+  toc?: AiToc | null;
   coverAssetId: string | null;
   date?: string;
   backHref?: string;
   backLabel?: string;
 }) {
-  const toc = headings(content);
+  const toc = aiToc?.items.length
+    ? aiToc.items.map((item) => ({
+        id: `ai-section-${item.blockIndex}`,
+        title: item.title,
+        level: 2,
+      }))
+    : headings(content);
   return (
     <main id="main-content" className="article-shell">
       <aside className="article-sidebar" aria-label="作者与文章目录">
@@ -69,7 +77,7 @@ export function ArticleView({
           />
         )}
         <ArticleToc headings={toc} className="mobile-toc" />
-        <ArticleContent document={content} />
+        <ArticleContent document={content} toc={aiToc} />
         <p className="article-end">— 感谢阅读 —</p>
       </article>
     </main>

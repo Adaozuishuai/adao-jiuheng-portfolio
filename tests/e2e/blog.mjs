@@ -138,6 +138,106 @@ try {
     screenshots,
     output,
   });
+  const aiId = await create();
+  await expectStatus(
+    await anonymous.post(`/api/admin/posts/${aiId}/ai-suggest`, {
+      headers,
+      data: { version: 1 },
+    }),
+    401,
+    'Anonymous AI generation rejected',
+  );
+  await page.goto(`/admin/posts/${aiId}`);
+  await page
+    .getByRole('textbox', { name: '文章正文' })
+    .fill(
+      '这是一段足够长的正文，用于验证 AI 能够读取文章内容并生成独立目录。文章中包含需要准确跳转的原始段落。',
+    );
+  await expect(page.locator('.ai-candidate')).toBeVisible({ timeout: 42_000 });
+  const [beforeAiApply] =
+    await sql`SELECT draft_title, draft_toc FROM posts WHERE id = ${aiId}`;
+  assert.equal(beforeAiApply.draft_title, '未命名文章');
+  assert.equal(beforeAiApply.draft_toc, null);
+  checks.push('Idle generation offers a candidate without changing the draft');
+  await page.getByRole('button', { name: '应用到草稿' }).click();
+  await expect(page.locator('.save-state')).toContainText('已于', {
+    timeout: 8_000,
+  });
+  const [applied] =
+    await sql`SELECT draft_title, draft_excerpt, draft_toc, version FROM posts WHERE id = ${aiId}`;
+  assert.equal(applied.draft_title, 'AI 整理标题');
+  assert.equal(applied.draft_excerpt, 'AI 根据正文生成的摘要。');
+  assert.equal(applied.draft_toc.items.length, 1);
+  await page.getByRole('button', { name: '预览', exact: true }).click();
+  await page.waitForURL('**/preview');
+  await page.locator('.article-sidebar .toc-toggle').first().click();
+  const aiAnchor = page
+    .locator('.article-sidebar a[href^="#ai-section-"]')
+    .first();
+  await expect(aiAnchor).toBeVisible();
+  const aiHref = await aiAnchor.getAttribute('href');
+  assert.equal(await page.locator(aiHref).count(), 1);
+  checks.push('Accepted AI directory points to its source paragraph');
+  await page.getByRole('link', { name: '继续编辑 →' }).click();
+  await page.getByRole('button', { name: '发布文章', exact: true }).click();
+  await expect(page.locator('.publish-feedback')).toContainText('已发布');
+  const [aiPublished] =
+    await sql`SELECT published_slug, published_toc FROM posts WHERE id = ${aiId}`;
+  assert.deepEqual(aiPublished.published_toc, applied.draft_toc);
+  const [aiRevision] =
+    await sql`SELECT snapshot FROM post_revisions WHERE post_id = ${aiId} AND kind = 'publish' ORDER BY created_at DESC LIMIT 1`;
+  assert.deepEqual(aiRevision.snapshot.toc, applied.draft_toc);
+  checks.push('Published directory is included in history snapshot');
+  await expectStatus(
+    await anonymous.get(`/blog/${aiPublished.published_slug}`),
+    200,
+    'AI title and directory publish only after manual action',
+  );
+  await page
+    .getByRole('textbox', { name: '文章正文' })
+    .fill('修改后的正文会使草稿目录失效，但已发布的目录仍应保持不变。');
+  await expect(page.locator('.save-state')).toContainText('已于', {
+    timeout: 8_000,
+  });
+  const [afterAiEdit] =
+    await sql`SELECT version, draft_toc, published_toc FROM posts WHERE id = ${aiId}`;
+  assert.equal(afterAiEdit.draft_toc, null);
+  assert.deepEqual(afterAiEdit.published_toc, applied.draft_toc);
+  checks.push(
+    'Body edit invalidates draft directory without changing published directory',
+  );
+  await page
+    .getByRole('textbox', { name: '文章正文' })
+    .fill('延迟响应：这段正文用于验证模型返回时，编辑器已经被再次修改的情况。');
+  await expect(page.getByText('正在整理正文…')).toBeVisible({
+    timeout: 42_000,
+  });
+  await page
+    .getByRole('textbox', { name: '文章正文' })
+    .fill('模型生成期间写下了另一段正文，因此旧候选不能出现在编辑器里。');
+  await page.waitForTimeout(1800);
+  await expect(page.locator('.ai-candidate')).toHaveCount(0);
+  await expect(page.locator('.save-state')).toContainText('已于', {
+    timeout: 8_000,
+  });
+  checks.push('Response for previous body is discarded after editing');
+  const [latestAiDraft] =
+    await sql`SELECT version FROM posts WHERE id = ${aiId}`;
+  const staleSave = await change(aiId, 'save', latestAiDraft.version, {
+    title: '旧目录',
+    slug: aiPublished.published_slug,
+    excerpt: '',
+    tags: [],
+    coverAssetId: null,
+    content: { type: 'doc', content: [paragraph('新的正文')] },
+    toc: applied.draft_toc,
+  });
+  assert.equal(staleSave.status(), 400);
+  checks.push('Stale AI directory cannot be applied to changed body');
+  assert.equal(
+    (await change(aiId, 'delete', latestAiDraft.version)).status(),
+    200,
+  );
   const unrestrictedId = await create();
   await page.goto(`/admin/posts/${unrestrictedId}`);
   await page.getByLabel('文章标题', { exact: true }).fill('');
@@ -622,7 +722,7 @@ try {
           (item) => item.id || item.getAttribute('class').split(' ')[0],
         ),
       ),
-    ['editorial-hero', 'writing', 'home-about', 'featured'],
+    ['editorial-hero', 'writing', 'featured'],
   );
   checks.push('Homepage order and latest five');
   await page

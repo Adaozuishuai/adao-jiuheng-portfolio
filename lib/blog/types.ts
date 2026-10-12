@@ -27,6 +27,10 @@ export type EditorNode = {
   content?: EditorNode[];
 };
 export type EditorDocument = EditorNode & { type: 'doc' };
+export type AiToc = {
+  sourceHash: string;
+  items: { title: string; blockIndex: number }[];
+};
 export type PostSnapshot = {
   title: string;
   slug: string;
@@ -34,6 +38,7 @@ export type PostSnapshot = {
   tags: string[];
   coverAssetId: string | null;
   content: EditorDocument;
+  toc: AiToc | null;
 };
 export type RevisionKind =
   | 'auto'
@@ -50,6 +55,7 @@ export type PublishedPost = {
   tags: string[];
   coverAssetId: string | null;
   content: EditorDocument;
+  toc: AiToc | null;
   firstPublishedAt: Date;
   lastPublishedAt: Date;
 };
