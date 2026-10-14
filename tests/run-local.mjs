@@ -11,9 +11,10 @@ import { drizzle } from 'drizzle-orm/postgres-js';
 import { migrate } from 'drizzle-orm/postgres-js/migrator';
 
 const suites = {
-  all: ['tests/e2e/auth.mjs', 'tests/e2e/blog.mjs'],
+  all: ['tests/e2e/auth.mjs', 'tests/e2e/blog.mjs', 'tests/e2e/chat.mjs'],
   auth: ['tests/e2e/auth.mjs'],
   blog: ['tests/e2e/blog.mjs'],
+  chat: ['tests/e2e/chat.mjs'],
 };
 const selection = process.argv[2] ?? 'all';
 const targets = suites[selection];
@@ -35,6 +36,33 @@ const modelServer = createServer(async (request, response) => {
   const prompt = JSON.parse(body).messages.at(-1).content;
   if (prompt.includes('延迟响应'))
     await new Promise((resolveDelay) => setTimeout(resolveDelay, 1500));
+  if (JSON.parse(body).stream) {
+    if (prompt.includes('模拟失败')) {
+      response.writeHead(503);
+      response.end();
+      return;
+    }
+    response.setHeader('Content-Type', 'text/event-stream');
+    const payload = JSON.parse(body);
+    const output = prompt.includes('姓名测试')
+      ? '一'.repeat(11) + '九恒网站助手'
+      : prompt.includes('脚本测试')
+        ? '<script>window.__chatXss=true</script>\n\n安全文本 [恶意链接](javascript:alert(1))'
+        : prompt.includes('检查上下文')
+          ? JSON.stringify(payload.messages)
+          : '这是逐步返回的回答。公开资料请参考 [来源 1]。';
+    for (const text of output.match(/[\s\S]{1,12}/g)) {
+      if (response.destroyed) return;
+      response.write(
+        'data: ' +
+          JSON.stringify({ choices: [{ delta: { content: text } }] }) +
+          '\r\n\r\n',
+      );
+      await new Promise((resolve) => setTimeout(resolve, 35));
+    }
+    response.end('data: [DONE]\n\n');
+    return;
+  }
   const blocks = JSON.parse(prompt);
   const toc = blocks.slice(0, 2).map((block) => ({
     title: `第 ${block.index + 1} 节`,
@@ -71,6 +99,7 @@ const env = {
   AUTH_TEST_ISOLATED: 'true',
   ZHIPU_TEST_API_URL: `http://127.0.0.1:${modelPort}`,
   ZHIPU_API_KEY: 'isolated-test-key',
+  CHAT_TRUST_PROXY: 'true',
   NODE_ENV: 'production',
 };
 let server;

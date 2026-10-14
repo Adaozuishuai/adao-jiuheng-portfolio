@@ -181,3 +181,10 @@ export const legacyLoginAttempts = pgTable(
     uniqueIndex('login_attempts_identity_unique').on(table.identityHash),
   ],
 );
+
+// Chat stores quota counters and expiring generation leases, never message bodies.
+export const chatLimits = pgTable('chat_limits', {
+  key: text('key').primaryKey(),
+  count: integer('count').notNull(),
+  expiresAt: timestamp('expires_at', { withTimezone: true }).notNull(),
+});

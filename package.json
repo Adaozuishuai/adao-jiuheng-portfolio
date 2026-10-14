@@ -27,7 +27,8 @@
     "admin:setup": "node scripts/admin/setup.mjs",
     "assets:ball-texture": "node scripts/assets/generate-ball-texture.mjs",
     "assets:hero-naturalize": "node scripts/assets/naturalize-hero.mjs",
-    "assets:hero-contours": "node scripts/assets/trace-hero-contours.mjs"
+    "assets:hero-contours": "node scripts/assets/trace-hero-contours.mjs",
+    "test:e2e:chat": "node tests/run-local.mjs chat"
   },
   "dependencies": {
     "@base-ui/react": "1.7.0",
@@ -57,8 +58,10 @@
     "react": "19.2.6",
     "react-day-picker": "9.8.1",
     "react-dom": "19.2.6",
+    "react-markdown": "^10.1.0",
     "react-resizable-panels": "4.5.8",
     "recharts": "3.8.0",
+    "remark-gfm": "^4.0.1",
     "shadcn": "4.18.0",
     "sharp": "^0.35.4",
     "tailwind-merge": "3.6.0",

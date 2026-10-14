@@ -1,3 +1,4 @@
+import { requestGlm } from '@/lib/server/glm';
 import { and, eq, isNull } from 'drizzle-orm';
 import { posts } from '@/db/schema';
 import { UUID } from '@/lib/blog/document';
@@ -31,48 +32,17 @@ export async function POST(
     const source = JSON.stringify(blocks);
     if (source.length > 30_000)
       throw new Response('正文过长，暂时无法完整整理', { status: 413 });
-    const key = process.env.ZHIPU_API_KEY;
-    if (!key) throw new Response('尚未配置 GLM API Key', { status: 503 });
-    const model = process.env.ZHIPU_MODEL || 'glm-5.3-flash';
-    let upstream: Response;
-    try {
-      const endpoint =
-        process.env.AUTH_TEST_ISOLATED === 'true' &&
-        process.env.ZHIPU_TEST_API_URL
-          ? process.env.ZHIPU_TEST_API_URL
-          : 'https://open.bigmodel.cn/api/paas/v4/chat/completions';
-      upstream = await fetch(endpoint, {
-        method: 'POST',
-        headers: {
-          Authorization: `Bearer ${key}`,
-          'Content-Type': 'application/json',
+    const upstream = await requestGlm(
+      [
+        {
+          role: 'system',
+          content:
+            '你是中文博客编辑。只基于提供的正文整理标题、摘要和目录，不补充正文没有的事实。返回严格 JSON 对象：{"title":"...","excerpt":"...","toc":[{"title":"...","blockIndex":0,"quote":"正文原文片段"}]}。目录按正文顺序，最多 8 项。每个 blockIndex 必须是输入给出的 index，quote 必须是该块连续的原文片段。不要输出其他内容。',
         },
-        body: JSON.stringify({
-          model,
-          stream: false,
-          response_format: { type: 'json_object' },
-          messages: [
-            {
-              role: 'system',
-              content:
-                '你是中文博客编辑。只基于提供的正文整理标题、摘要和目录，不补充正文没有的事实。返回严格 JSON 对象：{"title":"...","excerpt":"...","toc":[{"title":"...","blockIndex":0,"quote":"正文原文片段"}]}。目录按正文顺序，最多 8 项。每个 blockIndex 必须是输入给出的 index，quote 必须是该块连续的原文片段。不要输出其他内容。',
-            },
-            { role: 'user', content: source },
-          ],
-        }),
-        signal: AbortSignal.timeout(30_000),
-        cache: 'no-store',
-      });
-    } catch {
-      throw new Response('GLM 调用超时或网络不可用，请重试', { status: 502 });
-    }
-    if (!upstream.ok)
-      throw new Response(
-        upstream.status === 429
-          ? 'GLM 请求过于频繁，请稍后重试'
-          : 'GLM 调用失败，请检查密钥、模型和额度',
-        { status: 502 },
-      );
+        { role: 'user', content: source },
+      ],
+      { json: true },
+    );
     let raw: unknown;
     try {
       const data = await upstream.json();

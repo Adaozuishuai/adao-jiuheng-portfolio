@@ -36,9 +36,9 @@ export function ArticleView({
     <main id="main-content" className="article-shell">
       <aside className="article-sidebar" aria-label="作者与文章目录">
         <div className="article-sidebar-inner">
-          <Link className="article-author" href="/" aria-label="九恒的个人主页">
+          <Link className="article-author" href="/" aria-label="九衡的个人主页">
             <span className="article-author-avatar" aria-hidden="true">
-              恒
+              衡
             </span>
             <span className="article-author-info">
               <strong>jiuheng</strong>

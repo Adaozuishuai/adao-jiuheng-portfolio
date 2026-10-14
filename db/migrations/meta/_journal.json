@@ -43,6 +43,13 @@
       "when": 1791798857080,
       "tag": "0005_long_venom",
       "breakpoints": true
+    },
+    {
+      "idx": 6,
+      "version": "7",
+      "when": 1791801721574,
+      "tag": "0006_blue_purifiers",
+      "breakpoints": true
     }
   ]
 }
