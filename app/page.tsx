@@ -31,7 +31,7 @@ export default async function Home() {
   const posts = await listPublished(5).catch(() => null);
   return (
     <div className="editorial-home">
-      <SiteHeader />
+      <SiteHeader home />
       <main id="main-content">
         <section
           className="editorial-hero home-container"

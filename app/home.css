@@ -1067,3 +1067,33 @@
     display: none;
   }
 }
+
+.editorial-home .site-header-home {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+}
+.site-header-home .brand { justify-self: start; }
+.site-header-home nav { justify-self: center; }
+.site-header-zhihu {
+  justify-self: end;
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+}
+.site-header-zhihu:hover {
+  opacity: 0.8;
+}
+.site-header-zhihu img {
+  display: block;
+  width: 48px;
+  height: auto;
+}
+.site-header-home a:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 4px;
+  border-radius: 2px;
+}
+@media (max-width: 700px) {
+  .editorial-home .site-header-home { gap: 12px; }
+  .site-header-zhihu { font-size: 14px; }
+}
